@@ -9,15 +9,15 @@
 
 ### 1. Fix Branch Name
 - [x] Rename local `master` → `main`
-- [ ] Ensure local `main` matches remote `main`
+- [x] Ensure local `main` matches remote `main`
 
 ### 2. Stage All Files (Except ignored)
-- [ ] git add -A (respects .gitignore)
-- [ ] Verify staged files list
+- [x] git add -A (respects .gitignore)
+- [x] Verify staged files list
 
 ### 3. Commit
-- [ ] git commit with meaningful message
+- [x] git commit with meaningful message
 
 ### 4. Push to GitHub
-- [ ] git push origin main
+- [x] git push origin main
 

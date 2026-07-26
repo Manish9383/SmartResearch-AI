@@ -1,13 +1,14 @@
 # 📸 Screenshots & Demo
 
-## Screenshots
-Place your 3 UI screenshots here:
-- `screenshots/screenshot_1.png` — Upload / Dashboard view
-- `screenshots/screenshot_2.png` — Generated Report Page 1
-- `screenshots/screenshot_3.png` — Financial Tables / Charts
+This directory contains the visual assets for the SmartResearch AI project.
 
-## Demo PDF
-Place your sample generated report here:
-- `demo/sample_report.pdf`
+## Screenshots (`screenshots/`)
+- `screenshot_1.png` — Upload / Dashboard view
+- `screenshot_2.png` — Generated Report Page 1
+- `screenshot_3.png` — Financial Tables / Charts
+
+## Demo Documents (`demo/`)
+- `sample_report.pdf` — The final AI-generated equity research report (sample output)
+- `ICICI Q2FY26.pdf` — A raw quarterly results document used as input to the application
 
 These files are referenced from the main `README.md`.

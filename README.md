@@ -48,7 +48,7 @@ The report output closely mirrors the structure and depth of **institutional equ
 
 | Dashboard & Upload | Generated Report — Page 1 | Financial Tables — Page 4 |
 |---|---|---|
-| ![Upload Screen](docs/screenshots/screenshot_1.png) | ![Report Page 1](docs/screenshots/screenshot_2.png) | ![Financial Tables](docs/screenshots/screenshot_3.png) |
+| ![Upload Screen](docs/screenshots/screenshot_1.svg) | ![Report Page 1](docs/screenshots/screenshot_2.svg) | ![Financial Tables](docs/screenshots/screenshot_3.svg) |
 
 ### 📄 Sample Generated Report
 > [📥 Download Sample Report PDF](docs/demo/sample_report.pdf)

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ report.company_name }} - Geojit Equity Research Report</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 8mm 8mm 10mm 8mm;
+            @bottom-right {
+                content: "www.geojit.com";
+                font-family: Helvetica, Arial, sans-serif;
+                font-size: 7.5pt;
+                color: #008080;
+                font-weight: bold;
+            }
+            @bottom-left {
+                content: counter(page);
+                font-family: Helvetica, Arial, sans-serif;
+                font-size: 7.5pt;
+                color: #666;
+            }
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #222;
+            font-size: 7.5pt;
+            line-height: 1.25;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        /* Color Palette */
+        :root {
+            --geojit-teal: #008080;
+            --geojit-dark-teal: #005b5b;
+            --geojit-light-bg: #eef7f7;
+            --geojit-border: #b2d8d8;
+            --geojit-text: #222222;
+        }
+
+        /* Top Page Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #008080;
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+        }
+
+        .header-title-sec {
+            color: #008080;
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .company-header-name {
+            color: #000;
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 1px 0;
+        }
+
+        .sector-subtext {
+            font-size: 7.5pt;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .logo-block {
+            text-align: right;
+        }
+
+        .logo-title {
+            color: #008080;
+            font-size: 15pt;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .logo-tagline {
+            font-size: 5.5pt;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Rating Header Box (Page 1 Top) */
+        .header-banner-grid {
+            display: grid;
+            grid-template-columns: 1fr 220px;
+            gap: 10px;
+            margin-bottom: 6px;
+            align-items: center;
+        }
+
+        .rating-card {
+            background-color: #f1f3f5;
+            border: 1px solid #ced4da;
+            border-radius: 3px;
+            padding: 4px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .rating-val {
+            background: #008080;
+            color: white;
+            font-size: 14pt;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 2px;
+        }
+
+        .target-details {
+            font-size: 8pt;
+            line-height: 1.3;
+        }
+
+        .target-details strong {
+            color: #000;
+            font-size: 9pt;
+        }
+
+        /* Stock Snapshot Bar */
+        .snapshot-bar {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 6px;
+            font-size: 7pt;
+            background-color: #eef7f7;
+        }
+
+        .snapshot-bar th {
+            background-color: #008080;
+            color: white;
+            padding: 2px 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .snapshot-bar td {
+            padding: 2px 4px;
+            text-align: center;
+            border: 1px solid #b2d8d8;
+            font-weight: bold;
+        }
+
+        /* Page 1 Grid Layout (Sidebar 210px, Content 1fr) */
+        .page1-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 8px;
+        }
+
+        .sidebar-title {
+            background-color: #008080;
+            color: white;
+            font-size: 7.2pt;
+            font-weight: bold;
+            padding: 2px 4px;
+            margin-top: 3px;
+            margin-bottom: 2px;
+        }
+
+        .mini-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 4px;
+            font-size: 6.8pt;
+        }
+
+        .mini-table td {
+            padding: 1.5px 3px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .mini-table td.val {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .section-header-teal {
+            color: #008080;
+            font-size: 9pt;
+            font-weight: bold;
+            border-bottom: 1.5px solid #008080;
+            padding-bottom: 1.5px;
+            margin: 5px 0 3px 0;
+        }
+
+        .headline-banner {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #005b5b;
+            margin-bottom: 3px;
+        }
+
+        .bullets-list {
+            margin: 0 0 5px 0;
+            padding-left: 12px;
+        }
+
+        .bullets-list li {
+            margin-bottom: 2.5px;
+            text-align: justify;
+            font-size: 7.2pt;
+        }
+
+        /* Financial Tables */
+        .fin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+            font-size: 6.5pt;
+        }
+
+        .fin-table th {
+            background-color: #008080;
+            color: white;
+            padding: 1.8px 3px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .fin-table th:first-child {
+            text-align: left;
+        }
+
+        .fin-table td {
+            padding: 1.8px 3px;
+            text-align: right;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .fin-table td:first-child {
+            text-align: left;
+        }
+
+        .fin-table tr.highlight-row {
+            background-color: #eef7f7;
+            font-weight: bold;
+        }
+
+        /* 2x2 Charts Grid */
+        .charts-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin: 4px 0;
+        }
+
+        .chart-card {
+            border: 1px solid #e0e0e0;
+            padding: 3px;
+            text-align: center;
+            background: #fff;
+        }
+
+        .chart-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Disclaimers */
+        .disclaimer-box {
+            font-size: 6pt;
+            color: #333;
+            line-height: 1.25;
+            border-top: 1px solid #ccc;
+            padding-top: 4px;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1 -->
+    <div class="page-header">
+        <div>
+            <div class="header-title-sec">Retail Equity Research</div>
+            <div class="company-header-name">{{ report.company_name }}</div>
+            <div class="sector-subtext">Sector: {{ report.sector }} | {{ report.report_date }}</div>
+        </div>
+        <div class="logo-block">
+            <div class="logo-title">GEOJIT</div>
+            <div class="logo-tagline">PEOPLE YOU PROSPER WITH</div>
+        </div>
+    </div>
+
+    <!-- Rating & Target Header Box -->
+    <div class="header-banner-grid">
+        <div>
+            <div style="font-size: 7.5pt; font-weight: bold; color: #555; margin-bottom: 2px;">
+                Key Changes: &nbsp; Target <span style="color:#d9534f;">▼</span> &nbsp;|&nbsp; Rating <span style="color:#d9534f;">▼</span> &nbsp;|&nbsp; Earnings <span style="color:#d9534f;">▼</span>
+            </div>
+            <table class="snapshot-bar">
+                <thead>
+                    <tr>
+                        <th>Stock Type</th>
+                        <th>Bloomberg Code</th>
+                        <th>Sensex</th>
+                        <th>NSE Code</th>
+                        <th>BSE Code</th>
+                        <th>Time Frame</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ report.stock_type }}</td>
+                        <td>{{ report.bloomberg_code }}</td>
+                        <td>{{ report.sensex }}</td>
+                        <td>{{ report.nse_code }}</td>
+                        <td>{{ report.bse_code }}</td>
+                        <td>{{ report.time_frame }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="rating-card">
+            <div class="rating-val">{{ report.recommendation }}</div>
+            <div class="target-details">
+                Target: <strong>{{ report.target_price }}</strong><br>
+                CMP: <strong>{{ report.cmp }}</strong><br>
+                Return: <strong style="color:#2b8a3e;">{{ report.return_pct }}</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 1 Grid (Sidebar + Main Column) -->
+    <div class="page1-grid">
+        <!-- Left Sidebar -->
+        <div>
+            <div class="sidebar-title">Company Data</div>
+            <table class="mini-table">
+                <tr><td>Market Cap (Rs.cr)</td><td class="val">{{ report.company_data.market_cap_rs_cr }}</td></tr>
+                <tr><td>52 Wk High - Low (Rs.)</td><td class="val">{{ report.company_data.high_low_52wk }}</td></tr>
+                <tr><td>Enterprise Value (Rs.cr)</td><td class="val">{{ report.company_data.enterprise_value_rs_cr }}</td></tr>
+                <tr><td>Outstanding Shares (cr)</td><td class="val">{{ report.company_data.outstanding_shares_cr }}</td></tr>
+                <tr><td>Free Float (%)</td><td class="val">{{ report.company_data.free_float_pct }}</td></tr>
+                <tr><td>Dividend Yield (%)</td><td class="val">{{ report.company_data.dividend_yield_pct }}</td></tr>
+                <tr><td>6m average volume (cr)</td><td class="val">{{ report.company_data.avg_volume_6m_cr }}</td></tr>
+                <tr><td>Beta</td><td class="val">{{ report.company_data.beta }}</td></tr>
+                <tr><td>Face value (Rs.)</td><td class="val">{{ report.company_data.face_value_rs }}</td></tr>
+            </table>
+
+            <div class="sidebar-title">Shareholding (%)</div>
+            <table class="mini-table">
+                <tr style="background:#eef7f7; font-weight:bold;"><td>Category</td><td class="val">Q3</td><td class="val">Q4</td><td class="val">Q1</td></tr>
+                {% for row in report.shareholding %}
+                <tr><td>{{ row.category }}</td><td class="val">{{ row.q3 }}</td><td class="val">{{ row.q4 }}</td><td class="val">{{ row.q1 }}</td></tr>
+                {% endfor %}
+            </table>
+
+            <div class="sidebar-title">Price Performance</div>
+            <table class="mini-table">
+                <tr style="background:#eef7f7; font-weight:bold;"><td>Period</td><td class="val">3m</td><td class="val">6m</td><td class="val">1y</td></tr>
+                {% for row in report.price_performance %}
+                <tr><td>{{ row.period }}</td><td class="val">{{ row.m3 }}</td><td class="val">{{ row.m6 }}</td><td class="val">{{ row.y1 }}</td></tr>
+                {% endfor %}
+            </table>
+
+            {% if chart_paths.price_chart %}
+            <div style="margin: 3px 0; text-align: center;">
+                <img src="file:///{{ chart_paths.price_chart }}" style="width: 100%; border: 1px solid #ccc;">
+            </div>
+            {% endif %}
+
+            <div class="sidebar-title">Y.E March (cr) Summary</div>
+            <table class="mini-table">
+                {% if report.yearly_financials and report.yearly_financials.profit_and_loss %}
+                {% for row in report.yearly_financials.profit_and_loss[:7] %}
+                <tr>
+                    <td>{{ row.line_item }}</td>
+                    <td class="val">{{ row.fy3 }}</td>
+                    <td class="val">{{ row.fy4_est }}</td>
+                    <td class="val">{{ row.fy5_est }}</td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+
+        <!-- Right Main Column -->
+        <div>
+            <div class="headline-banner">{{ report.headline_highlight }}</div>
+            <p style="margin-bottom: 4px; text-align: justify; font-size: 7.2pt; color: #333;">
+                {{ report.business_overview if report.business_overview else report.company_profile.business_model }}
+            </p>
+
+            <ul class="bullets-list">
+                {% for bullet in report.key_highlights[:5] %}
+                <li>{{ bullet }}</li>
+                {% endfor %}
+            </ul>
+
+            <div class="section-header-teal">Outlook & Valuation</div>
+            <p style="text-align: justify; margin-bottom: 4px; font-size: 7.2pt;">
+                {{ report.outlook if report.outlook else report.outlook_data.guidance_summary }}
+            </p>
+            <p style="text-align: justify; margin-bottom: 6px; font-size: 7.2pt;">
+                {{ report.valuation }}
+            </p>
+
+            <div class="section-header-teal">Quarterly Financials Consolidated</div>
+            <table class="fin-table">
+                <thead>
+                    <tr>
+                        <th>Rs.cr</th>
+                        <th>Q1 Current</th>
+                        <th>Q1 Prev</th>
+                        <th>YoY Growth (%)</th>
+                        <th>Q4 Prev</th>
+                        <th>QoQ Growth (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in report.quarterly_financials %}
+                    <tr {% if 'PAT' in row.metric or 'Sales' in row.metric %}class="highlight-row"{% endif %}>
+                        <td>{{ row.metric }}</td>
+                        <td>{{ row.q1_current }}</td>
+                        <td>{{ row.q1_previous }}</td>
+                        <td>{{ row.yoy_growth_pct }}</td>
+                        <td>{{ row.q4_previous }}</td>
+                        <td>{{ row.qoq_growth_pct }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 2 -->
+    <div class="page-header">
+        <div>
+            <div class="company-header-name" style="font-size: 14pt;">{{ report.company_name }} - Key Highlights & Visuals</div>
+        </div>
+        <div class="logo-block">
+            <div class="logo-title" style="font-size: 13pt;">GEOJIT</div>
+        </div>
+    </div>
+
+    <div class="section-header-teal">Operational Key Highlights</div>
+    <ul class="bullets-list">
+        {% for bullet in report.key_highlights %}
+        <li>{{ bullet }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="section-header-teal">Financial Visuals & Performance Trends</div>
+    <div class="charts-2x2">
+        {% if chart_paths.revenue_chart %}
+        <div class="chart-card"><img src="file:///{{ chart_paths.revenue_chart }}" class="chart-img"></div>
+        {% endif %}
+
+        {% if chart_paths.gov_chart %}
+        <div class="chart-card"><img src="file:///{{ chart_paths.gov_chart }}" class="chart-img"></div>
+        {% endif %}
+
+        {% if chart_paths.ebitda_chart %}
+        <div class="chart-card"><img src="file:///{{ chart_paths.ebitda_chart }}" class="chart-img"></div>
+        {% endif %}
+
+        {% if chart_paths.pat_chart %}
+        <div class="chart-card"><img src="file:///{{ chart_paths.pat_chart }}" class="chart-img"></div>
+        {% endif %}
+    </div>
+
+    <div class="section-header-teal" style="margin-top: 6px;">Change in Estimates</div>
+    <table class="fin-table">
+        <thead>
+            <tr>
+                <th rowspan="2">Year / Rs cr</th>
+                <th colspan="2" style="text-align: center;">Old estimates</th>
+                <th colspan="2" style="text-align: center;">New estimates</th>
+                <th colspan="2" style="text-align: center;">Change (%)</th>
+            </tr>
+            <tr>
+                <th>FY26E</th>
+                <th>FY27E</th>
+                <th>FY26E</th>
+                <th>FY27E</th>
+                <th>FY26E</th>
+                <th>FY27E</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in report.change_in_estimates %}
+            <tr>
+                <td>{{ row.metric }}</td>
+                <td>{{ row.old_fy1 }}</td>
+                <td>{{ row.old_fy2 }}</td>
+                <td>{{ row.new_fy1 }}</td>
+                <td>{{ row.new_fy2 }}</td>
+                <td>{{ row.change_fy1_pct }}</td>
+                <td>{{ row.change_fy2_pct }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 3 -->
+    <div class="page-header">
+        <div>
+            <div class="company-header-name" style="font-size: 14pt;">Consolidated Financial Statements</div>
+        </div>
+        <div class="logo-block">
+            <div class="logo-title" style="font-size: 13pt;">GEOJIT</div>
+        </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <!-- Profit & Loss -->
+        <div>
+            <div class="section-header-teal">Profit & Loss</div>
+            <table class="fin-table">
+                <thead>
+                    <tr>
+                        <th>Y.E March (Rs. Cr)</th>
+                        {% for year in report.yearly_financials.years %}
+                        <th>{{ year }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in report.yearly_financials.profit_and_loss %}
+                    <tr {% if 'PAT' in row.line_item or 'Sales' in row.line_item %}class="highlight-row"{% endif %}>
+                        <td>{{ row.line_item }}</td>
+                        <td>{{ row.fy1 }}</td>
+                        <td>{{ row.fy2 }}</td>
+                        <td>{{ row.fy3 }}</td>
+                        <td>{{ row.fy4_est }}</td>
+                        <td>{{ row.fy5_est }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="section-header-teal">Cashflow Statement</div>
+            <table class="fin-table">
+                <thead>
+                    <tr>
+                        <th>Y.E March</th>
+                        {% for year in report.yearly_financials.years %}
+                        <th>{{ year }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in report.yearly_financials.cashflow %}
+                    <tr>
+                        <td>{{ row.line_item }}</td>
+                        <td>{{ row.fy1 }}</td>
+                        <td>{{ row.fy2 }}</td>
+                        <td>{{ row.fy3 }}</td>
+                        <td>{{ row.fy4_est }}</td>
+                        <td>{{ row.fy5_est }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Balance Sheet & Ratios -->
+        <div>
+            <div class="section-header-teal">Balance Sheet</div>
+            <table class="fin-table">
+                <thead>
+                    <tr>
+                        <th>Y.E March (Rs. Cr)</th>
+                        {% for year in report.yearly_financials.years %}
+                        <th>{{ year }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in report.yearly_financials.balance_sheet %}
+                    <tr {% if 'Total' in row.line_item %}class="highlight-row"{% endif %}>
+                        <td>{{ row.line_item }}</td>
+                        <td>{{ row.fy1 }}</td>
+                        <td>{{ row.fy2 }}</td>
+                        <td>{{ row.fy3 }}</td>
+                        <td>{{ row.fy4_est }}</td>
+                        <td>{{ row.fy5_est }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="section-header-teal">Key Ratios & Multiples</div>
+            <table class="fin-table">
+                <thead>
+                    <tr>
+                        <th>Y.E March</th>
+                        {% for year in report.yearly_financials.years %}
+                        <th>{{ year }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in report.yearly_financials.ratios %}
+                    <tr>
+                        <td>{{ row.line_item }}</td>
+                        <td>{{ row.fy1 }}</td>
+                        <td>{{ row.fy2 }}</td>
+                        <td>{{ row.fy3 }}</td>
+                        <td>{{ row.fy4_est }}</td>
+                        <td>{{ row.fy5_est }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 4 -->
+    <div class="page-header">
+        <div>
+            <div class="company-header-name" style="font-size: 14pt;">Recommendation Summary & Disclosures</div>
+        </div>
+        <div class="logo-block">
+            <div class="logo-title" style="font-size: 13pt;">GEOJIT</div>
+        </div>
+    </div>
+
+    <!-- Recommendation Summary (Last 3 Years) -->
+    <div class="section-header-teal">Recommendation Summary - (last 3 years)</div>
+    <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px; margin-bottom: 8px; align-items: center;">
+        <div>
+            {% if chart_paths.rec_chart %}
+            <img src="file:///{{ chart_paths.rec_chart }}" style="width: 100%; border: 1px solid #ddd;">
+            {% endif %}
+        </div>
+        <div>
+            <table class="fin-table">
+                <thead>
+                    <tr>
+                        <th>Dates</th>
+                        <th>Rating</th>
+                        <th>Target (Rs.)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>11-Aug-22</td><td style="color:#2e7d32; font-weight:bold;">BUY</td><td>69</td></tr>
+                    <tr><td>17-Feb-23</td><td style="color:#2e7d32; font-weight:bold;">BUY</td><td>60</td></tr>
+                    <tr><td>08-Aug-23</td><td style="color:#2e7d32; font-weight:bold;">BUY</td><td>114</td></tr>
+                    <tr><td>13-Feb-24</td><td style="color:#2e7d32; font-weight:bold;">BUY</td><td>174</td></tr>
+                    <tr><td>16-May-24</td><td style="color:#2e7d32; font-weight:bold;">BUY</td><td>220</td></tr>
+                    <tr><td>28-Oct-24</td><td style="color:#2e7d32; font-weight:bold;">BUY</td><td>284</td></tr>
+                    <tr><td>30-Jan-25</td><td style="color:#2e7d32; font-weight:bold;">BUY</td><td>254</td></tr>
+                    <tr class="highlight-row"><td>29-Jul-25</td><td style="color:#008080; font-weight:bold;">HOLD</td><td>337</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="section-header-teal">Investment Rating Criteria</div>
+    <table class="fin-table" style="margin-bottom: 6px;">
+        <thead>
+            <tr>
+                <th>Ratings</th>
+                <th>Large caps</th>
+                <th>Midcaps</th>
+                <th>Small Caps</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>Buy</b></td>
+                <td>Upside is above 10%</td>
+                <td>Upside is above 15%</td>
+                <td>Upside is above 20%</td>
+            </tr>
+            <tr>
+                <td><b>Accumulate</b></td>
+                <td>-</td>
+                <td>Upside is between 10%-15%</td>
+                <td>Upside is between 10%-20%</td>
+            </tr>
+            <tr>
+                <td><b>Hold</b></td>
+                <td>Upside is between 0% - 10%</td>
+                <td>Upside is between 0%-10%</td>
+                <td>Upside is between 0%-10%</td>
+            </tr>
+            <tr>
+                <td><b>Reduce/sell</b></td>
+                <td>Downside is more than 0%</td>
+                <td>Downside is more than 0%</td>
+                <td>Downside is more than 0%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="font-size: 7pt; margin-bottom: 6px; background: #eef7f7; padding: 4px; border: 1px solid #b2d8d8;">
+        <strong>Symbols Definition:</strong> &nbsp;
+        <span style="color:#2e7d32; font-weight:bold;">▲ Upgrade</span> &nbsp;&nbsp;
+        <span style="color:#f57f17; font-weight:bold;">● No Change</span> &nbsp;&nbsp;
+        <span style="color:#c62828; font-weight:bold;">▼ Downgrade</span>
+    </div>
+
+    <div class="disclaimer-box">
+        <strong>DISCLAIMER & DISCLOSURES</strong><br>
+        <p><b>Certification:</b> I, Gopika Gopan, author of this Report, hereby certify that all the views expressed in this research report reflect our personal views about any or all of the subject issuer or securities. This report has been prepared by the Research Team of Geojit Financial Services Limited.</p>
+        <p><b>Regulatory Disclosures:</b> Geojit Financial Services Ltd is a SEBI registered Research Entity (SEBI Reg No: INH000019567). The analyst confirms no financial conflict of interest or beneficial ownership exceeds 1% in the subject company.</p>
+        <p><b>Standard Warning:</b> Investment in securities market are subject to market risks. Read all the related documents carefully before investing.</p>
+        <p style="margin-top: 4px; font-weight: bold; color: #005b5b;">
+            Geojit Financial Services Ltd. Registered Office: 7th Floor 34/659-P, Civil Line Road, Padivattom, Kochi-682024, Kerala, India. Phone: +91 484-2901000 | Website: www.geojit.com
+        </p>
+    </div>
+
+</body>
+</html>
